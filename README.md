@@ -1,24 +1,14 @@
-# Kingdom Clash — Rise of the Realm
+# Kingdom Clash: Rise of the Realm (3D)
 
-A fresh browser-based 2D kingdom strategy game. Built for desktop and mobile browsers; **no APK is produced**.
+Browser-based 3D medieval kingdom strategy game (Three.js r164, no build step). Hosted on GitHub Pages.
 
-## Play
-Open the GitHub Pages site after the Pages workflow succeeds.
+**Play:** build on plots, grow resources, train footmen / archers / knights, upgrade the castle (5 levels), and attack the bandit camp in a real-time 3D battle (click to move, click enemies to attack).
 
-## Current gameplay
-- Illustrated kingdom map with clickable building plots
-- Castle upgrades, resource gathering, and passive resource production
-- Lumber camps, farms, quarries, and barracks
-- Footmen and archer training
-- Bandit outpost battles with troop losses and rewards
-- Local autosave and reset
-- Responsive layout for mobile and desktop
+## Controls
+Desktop: drag = pan, right-drag or Shift+drag = rotate, wheel = zoom, WASD/arrows + Q/E. Touch: drag = pan, pinch = zoom, tap = select/command.
 
-## Multiplayer status
-Online multiplayer is **not connected** in this build. GitHub Pages hosts static files; a room code by itself cannot synchronize players. A real-time backend (for example, a configured Supabase project with appropriate database policies/realtime enabled) must be connected before claiming live multiplayer works. This prototype intentionally labels that limitation rather than faking online play.
-
-## Deploy
-The workflow in `.github/workflows/deploy-pages.yml` publishes the root of `main` using GitHub Pages. If needed, open **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**.
-
-## Save data
-Progress is saved in the browser's local storage on the current device. Clearing browser data resets local progress.
+## Status / known limitations
+- Rendering was written without a GPU test environment; logic (economy, training, quests, saves, combat balance) is tested in Node (`tests/`) and the UI flow with a stubbed 3D engine. Expect visual bugs on first real run.
+- Not implemented yet: ambient villagers/wildlife, audio, settings/graphics menu, pause menu, particle smoke, grass/flowers, bloom.
+- Three.js is vendored at deploy time into `vendor/` (see workflow); locally it falls back to a pinned CDN.
+- Online multiplayer is not connected.

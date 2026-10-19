@@ -19,6 +19,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Vendor pinned Three.js r164 locally
+        run: |
+          mkdir -p vendor
+          npm pack three@0.164.1 --silent
+          tar -xzf three-0.164.1.tgz package/build/three.module.min.js
+          cp package/build/three.module.min.js vendor/three.module.min.js
+          rm -rf package three-0.164.1.tgz
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
