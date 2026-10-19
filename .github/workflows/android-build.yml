@@ -1,0 +1,27 @@
+name: Build Kingdom Clash 2D Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  export:
+    name: Export Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Export APK with Godot
+        uses: firebelley/godot-export@v6.0.0
+        with:
+          godot_executable_download_url: https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
+          relative_project_path: ./
+          export_debug: true
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: KingdomClash2D-Android-APK
+          path: build/KingdomClash2D.apk
+          if-no-files-found: error
